@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Caja Sorpresa 3D - Día del Hombre</title>
     <style>
         * {
@@ -18,6 +18,7 @@
             overflow: hidden;
             perspective: 1000px;
             position: relative;
+            touch-action: none;
         }
         
         .aurora {
@@ -52,12 +53,6 @@
             left: -50%;
             animation-delay: 0s;
             height: 30%;
-            background: radial-gradient(ellipse 70% 40% at 30% 50%, 
-                rgba(30, 144, 255, 0.08) 0%, 
-                rgba(65, 105, 225, 0.15) 40%, 
-                rgba(138, 43, 226, 0.05) 70%, 
-                transparent 100%
-            );
         }
         
         .aurora-layer:nth-child(2) {
@@ -65,12 +60,6 @@
             left: -30%;
             animation-delay: -5s;
             height: 25%;
-            background: radial-gradient(ellipse 60% 30% at 70% 60%, 
-                rgba(0, 191, 255, 0.1) 0%, 
-                rgba(65, 105, 225, 0.12) 50%, 
-                rgba(30, 144, 255, 0.06) 80%, 
-                transparent 100%
-            );
             animation-direction: reverse;
         }
         
@@ -79,12 +68,6 @@
             left: -70%;
             animation-delay: -10s;
             height: 35%;
-            background: radial-gradient(ellipse 90% 50% at 50% 40%, 
-                rgba(65, 105, 225, 0.07) 0%, 
-                rgba(0, 191, 255, 0.09) 35%, 
-                rgba(138, 43, 226, 0.04) 65%, 
-                transparent 100%
-            );
         }
         
         @keyframes auroraDrift {
@@ -120,17 +103,19 @@
         
         .title {
             position: absolute;
-            top: 50px;
+            top: clamp(20px, 5vh, 50px);
             left: 50%;
             transform: translateX(-50%);
             color: #00d4ff;
-            font-size: 2.5rem;
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
             font-weight: bold;
             text-shadow: 0 0 20px #00d4ff, 0 0 40px #0099ff;
             z-index: 100;
             animation: titleGlow 2s ease-in-out infinite alternate;
             transition: opacity 1s ease-out;
             pointer-events: none;
+            text-align: center;
+            padding: 0 15px;
         }
         
         .title.fade-out {
@@ -144,8 +129,8 @@
         
         .box-container {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: clamp(200px, 60vw, 300px);
+            height: clamp(200px, 60vw, 300px);
             transform-style: preserve-3d;
             animation: boxFloat 4s ease-in-out infinite, boxRotate 8s linear infinite;
             cursor: pointer;
@@ -166,54 +151,54 @@
         
         .face {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(145deg, #0066cc, #0052a3, #003d7a);
             border: 4px solid #00d4ff;
             border-radius: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 3rem;
+            font-size: clamp(2rem, 8vw, 3rem);
             color: white;
             text-shadow: 0 0 15px #00d4ff;
             box-shadow: inset 0 0 50px rgba(0,0,0,0.3), 0 0 40px rgba(0,212,255,0.6), 0 0 60px rgba(0,153,255,0.4);
         }
         
         .front { 
-            transform: rotateY(0deg) translateZ(150px);
+            transform: rotateY(0deg) translateZ(clamp(100px, 30vw, 150px));
             transform-origin: bottom center;
             transition: transform 2s ease-out;
         }
         
         .box-container.opening .front {
-            transform: rotateY(0deg) translateZ(150px) rotateX(-110deg);
+            transform: rotateY(0deg) translateZ(clamp(100px, 30vw, 150px)) rotateX(-110deg);
         }
         
-        .back { transform: rotateY(180deg) translateZ(150px); }
-        .right { transform: rotateY(90deg) translateZ(150px); }
-        .left { transform: rotateY(-90deg) translateZ(150px); }
+        .back { transform: rotateY(180deg) translateZ(clamp(100px, 30vw, 150px)); }
+        .right { transform: rotateY(90deg) translateZ(clamp(100px, 30vw, 150px)); }
+        .left { transform: rotateY(-90deg) translateZ(clamp(100px, 30vw, 150px)); }
         .top { 
-            transform: rotateX(90deg) translateZ(150px);
+            transform: rotateX(90deg) translateZ(clamp(100px, 30vw, 150px));
             background: linear-gradient(145deg, #0052a3, #003d7a, #0066cc);
         }
-        .bottom { transform: rotateX(-90deg) translateZ(150px); }
+        .bottom { transform: rotateX(-90deg) translateZ(clamp(100px, 30vw, 150px)); }
         
         .inside {
             position: absolute;
-            width: 292px;
-            height: 292px;
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
             background: #000000;
             border-radius: 8px;
             left: 4px;
             top: 4px;
-            transform: translateZ(-150px);
+            transform: translateZ(calc(-1 * clamp(100px, 30vw, 150px)));
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: #00d4ff;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             text-shadow: 0 0 20px #00d4ff;
             opacity: 0;
             transition: opacity 2s ease-in-out;
@@ -236,30 +221,32 @@
         }
         
         .ribbon-vertical {
-            width: 50px;
-            height: 320px;
-            left: 125px;
+            width: clamp(30px, 8vw, 50px);
+            height: calc(100% + 20px);
+            left: 50%;
+            transform: translateX(-50%);
             top: -10px;
             border-radius: 25px;
         }
         
         .ribbon-horizontal {
-            width: 320px;
-            height: 50px;
+            width: calc(100% + 20px);
+            height: clamp(30px, 8vw, 50px);
             left: -10px;
-            top: 125px;
+            top: 50%;
+            transform: translateY(-50%);
             border-radius: 25px;
         }
         
         .bow {
             position: absolute;
-            top: 110px;
-            left: 110px;
-            width: 80px;
-            height: 80px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            width: clamp(50px, 15vw, 80px);
+            height: clamp(50px, 15vw, 80px);
             background: linear-gradient(145deg, #00d4ff, #00b8e6);
             border-radius: 50% 0 50% 0;
-            transform: rotate(45deg);
             box-shadow: 0 0 30px rgba(0,212,255,0.9), 0 0 50px rgba(0,153,255,0.7), inset 0 -3px 10px rgba(0,0,0,0.3);
             z-index: 15;
             animation: bowPulse 2s ease-in-out infinite;
@@ -284,8 +271,8 @@
         }
         
         @keyframes bowPulse {
-            0%, 100% { transform: rotate(45deg) scale(1); }
-            50% { transform: rotate(45deg) scale(1.15); }
+            0%, 100% { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+            50% { transform: translate(-50%, -50%) rotate(45deg) scale(1.15); }
         }
         
         @keyframes boxFloat {
@@ -300,17 +287,19 @@
         
         .click-hint {
             position: absolute;
-            bottom: 140px;
+            bottom: clamp(100px, 20vh, 140px);
             left: 50%;
             transform: translateX(-50%);
             color: #00d4ff;
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 3vw, 1.3rem);
             font-weight: bold;
             text-shadow: 0 0 15px #00d4ff, 0 0 25px #0099ff;
             animation: hintPulse 2s ease-in-out infinite;
             z-index: 100;
             transition: opacity 1s ease-out;
             pointer-events: none;
+            text-align: center;
+            padding: 0 15px;
         }
         
         .click-hint.fade-out {
@@ -324,26 +313,51 @@
         
         .open-button {
             position: fixed;
-            bottom: 20px;
+            bottom: clamp(15px, 4vh, 20px);
             left: 50%;
             transform: translateX(-50%);
-            padding: 12px 24px;
+            padding: clamp(10px, 2vh, 12px) clamp(20px, 5vw, 24px);
             background: linear-gradient(145deg, #00d4ff, #0099ff);
             color: #000;
             border: none;
             border-radius: 30px;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 0 15px rgba(0,212,255,0.7), 0 0 30px rgba(0,153,255,0.5);
             transition: all 0.3s ease;
             z-index: 9999;
             pointer-events: auto;
+            white-space: nowrap;
         }
         
-        .open-button:hover {
+        .open-button:hover, .open-button:active {
             transform: translateX(-50%) scale(1.05);
             box-shadow: 0 0 25px rgba(0,212,255,0.9), 0 0 40px rgba(0,153,255,0.7);
+        }
+        
+        .fullscreen-button {
+            position: fixed;
+            top: clamp(10px, 2vh, 15px);
+            right: clamp(10px, 2vw, 15px);
+            width: clamp(40px, 8vw, 50px);
+            height: clamp(40px, 8vw, 50px);
+            background: linear-gradient(145deg, #00d4ff, #0099ff);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0,212,255,0.7);
+            transition: all 0.3s ease;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+        }
+        
+        .fullscreen-button:hover, .fullscreen-button:active {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0,212,255,0.9);
         }
         
         .sparkles {
@@ -356,8 +370,8 @@
         
         .sparkle {
             position: absolute;
-            width: 5px;
-            height: 5px;
+            width: clamp(3px, 1vw, 5px);
+            height: clamp(3px, 1vw, 5px);
             background: #00d4ff;
             border-radius: 50%;
             box-shadow: 0 0 15px #00d4ff, 0 0 25px #0099ff;
@@ -411,8 +425,11 @@
         <div class="aurora-layer"></div>
         <div class="aurora-layer"></div>
     </div>
+    
+    <button class="fullscreen-button" id="fullscreenBtn">⛶</button>
+    
     <div class="scene" id="scene">
-        <div class="title" id="title">🎁 Sopresa  dia 30 de Septiembre🤫 </div>
+        <div class="title" id="title">🎁 Sorpresa día 30 de Septiembre 🤫</div>
         
         <div class="sparkles">
             <div class="sparkle"></div>
@@ -451,6 +468,7 @@
     <script>
         const boxContainer = document.getElementById('boxContainer');
         const openButton = document.getElementById('openButton');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
         const scene = document.getElementById('scene');
         const loadingMessage = document.getElementById('loadingMessage');
         const clickHint = document.getElementById('clickHint');
@@ -458,6 +476,19 @@
         
         let isOpening = false;
         let mouseListener = null;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        // Función pantalla completa
+        fullscreenBtn.addEventListener('click', function() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log('Error al activar pantalla completa:', err);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        });
         
         function openBox() {
             if (!isOpening) {
@@ -469,6 +500,7 @@
                 if (mouseListener) {
                     document.removeEventListener('mousemove', mouseListener);
                 }
+                document.removeEventListener('touchmove', handleTouchMove);
                 
                 setTimeout(() => {
                     scene.style.transform = '';
@@ -483,8 +515,11 @@
         }
         
         boxContainer.addEventListener('click', openBox);
+        boxContainer.addEventListener('touchend', openBox);
         openButton.addEventListener('click', openBox);
+        openButton.addEventListener('touchend', openBox);
         
+        // Mouse movement para desktop
         mouseListener = function(e) {
             if (!isOpening) {
                 const mouseX = (e.clientX / window.innerWidth - 0.5) * 10;
@@ -492,7 +527,23 @@
                 scene.style.transform = `rotateY(${mouseX}deg) rotateX(${-mouseY}deg)`;
             }
         };
-        document.addEventListener('mousemove', mouseListener);
+        
+        // Touch movement para móvil
+        function handleTouchMove(e) {
+            if (!isOpening && e.touches.length === 1) {
+                const touch = e.touches[0];
+                const touchX = (touch.clientX / window.innerWidth - 0.5) * 10;
+                const touchY = (touch.clientY / window.innerHeight - 0.5) * 10;
+                scene.style.transform = `rotateY(${touchX}deg) rotateX(${-touchY}deg)`;
+            }
+        }
+        
+        // Detectar si es móvil o desktop
+        if ('ontouchstart' in window) {
+            document.addEventListener('touchmove', handleTouchMove, { passive: true });
+        } else {
+            document.addEventListener('mousemove', mouseListener);
+        }
         
         openButton.addEventListener('mouseenter', function() {
             if (mouseListener) {
