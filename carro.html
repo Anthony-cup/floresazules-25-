@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intro - Día de las Flores Azules</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Montserrat',sans-serif;min-height:100vh;background:#000000;position:relative;overflow:hidden;}
+
+/* Fondo con estrellas */
+.stars-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 3s infinite;}
+@keyframes twinkle{0%,100%{opacity:0.2;transform:scale(1);}50%{opacity:0.8;transform:scale(1.5);}}
+
+/* Partículas flotantes azules LED */
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.particle{position:absolute;width:6px;height:6px;background:#00d4ff;border-radius:50%;box-shadow:0 0 15px #00d4ff, 0 0 30px #0099ff;animation:float 8s infinite;}
+@keyframes float{0%{transform:translateY(100vh) translateX(0) rotate(0deg);opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{transform:translateY(-100px) translateX(100px) rotate(360deg);opacity:0;}}
+
+/* Símbolos flotantes LED */
+.flower{position:absolute;font-size:35px;animation:flowerFloat 6s infinite;filter:drop-shadow(0 0 15px #00d4ff) drop-shadow(0 0 25px #0099ff);}
+@keyframes flowerFloat{0%{transform:translateY(100vh) rotate(0deg) scale(0);opacity:0;}20%{opacity:1;transform:translateY(80vh) rotate(90deg) scale(1);}80%{opacity:1;}100%{transform:translateY(-50px) rotate(360deg) scale(1.5);opacity:0;}}
+
+/* Ondas de energía LED */
+.energy-wave{position:fixed;top:50%;left:50%;width:100px;height:100px;border:3px solid #00d4ff;border-radius:50%;transform:translate(-50%,-50%);opacity:0;z-index:5;box-shadow:0 0 20px #00d4ff, 0 0 40px #0099ff;}
+@keyframes waveExpand{0%{width:100px;height:100px;opacity:0.9;}100%{width:900px;height:900px;opacity:0;}}
+
+/* INTRO OVERLAY - Negro con texto LED azul */
+.intro-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#000000;z-index:10;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:1;transition:opacity 1.5s ease-out;}
+
+.intro-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3em,10vw,10em);color:#00d4ff;text-align:center;opacity:0;animation:introTitleFade 2s ease-out 0.5s forwards, introTitleOut 1.2s ease-out 6s forwards;text-shadow:0 0 20px #00d4ff, 0 0 40px #0099ff, 0 0 60px #0066ff, 0 0 80px #0099ff;font-weight:600;letter-spacing:5px;}
+@keyframes introTitleFade{0%{opacity:0;transform:scale(0.3) translateY(100px);filter:blur(20px);text-shadow:0 0 50px #00d4ff;}100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0);}}
+@keyframes introTitleOut{0%{opacity:1;transform:scale(1) translateY(0);}100%{opacity:0;transform:scale(0.7) translateY(-80px);filter:blur(15px);}}
+
+.intro-date{font-family:'Montserrat',sans-serif;font-size:clamp(1.2em,4vw,2.5em);color:#00d4ff;text-align:center;opacity:0;animation:introDateFade 1.5s ease-out 2s forwards, introDateOut 1.2s ease-out 6s forwards;margin-top:30px;letter-spacing:8px;text-shadow:0 0 15px #00d4ff, 0 0 30px #0099ff, 0 0 45px #0066ff;font-weight:600;}
+@keyframes introDateFade{0%{opacity:0;transform:translateY(40px) scale(0.8);filter:blur(10px);}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}}
+@keyframes introDateOut{0%{opacity:1;transform:translateY(0);}100%{opacity:0;transform:translateY(-60px);filter:blur(10px);}}
+
+.logo-intro{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);width:clamp(250px,40vw,500px);height:auto;opacity:0;animation:introLogoFade 2s ease-out 3.5s forwards, introLogoOut 1.2s ease-out 6s forwards;filter:drop-shadow(0 0 30px #00d4ff) drop-shadow(0 0 50px #0099ff) drop-shadow(0 0 70px #0066ff);}
+@keyframes introLogoFade{0%{opacity:0;transform:translateX(-50%) scale(0.5) translateY(50px);filter:blur(15px) drop-shadow(0 0 50px #00d4ff);}100%{opacity:1;transform:translateX(-50%) scale(1) translateY(0);filter:blur(0) drop-shadow(0 0 30px #00d4ff);}}
+@keyframes introLogoOut{0%{opacity:1;transform:translateX(-50%) translateY(0);}100%{opacity:0;transform:translateX(-50%) translateY(60px);filter:blur(15px);}}
+
+.intro-subtitle{font-family:'Montserrat',sans-serif;font-size:clamp(0.8em,2vw,1.2em);color:#00d4ff;text-align:center;opacity:0;animation:subtitleFade 1.5s ease-out 2.8s forwards, introSubOut 1.2s ease-out 6s forwards;margin-top:15px;letter-spacing:3px;text-transform:uppercase;font-weight:400;text-shadow:0 0 10px #00d4ff, 0 0 20px #0099ff;}
+@keyframes subtitleFade{0%{opacity:0;transform:translateY(20px);}100%{opacity:1;transform:translateY(0);}}
+@keyframes introSubOut{0%{opacity:1;transform:translateY(0);}100%{opacity:0;transform:translateY(-40px);}}
+
+/* MENSAJE "Estos carritos son para ti" */
+.car-message{position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);font-family:'Montserrat',sans-serif;font-size:clamp(2em,6vw,5em);color:#00d4ff;text-align:center;z-index:25;opacity:0;display:none;font-weight:700;letter-spacing:3px;text-shadow:0 0 30px #00d4ff, 0 0 50px #0099ff, 0 0 70px #0066ff, 0 0 90px #00d4ff;padding:0 20px;}
+.car-message.show{display:block;animation:messageIn 1.8s ease-out forwards, messageOut 1.2s ease-out 3s forwards;}
+@keyframes messageIn{0%{opacity:0;transform:translate(-50%, -50%) scale(0.4) rotateY(-90deg);filter:blur(25px);text-shadow:0 0 80px #00d4ff;}100%{opacity:1;transform:translate(-50%, -50%) scale(1) rotateY(0deg);filter:blur(0);}}
+@keyframes messageOut{0%{opacity:1;transform:translate(-50%, -50%) scale(1);}100%{opacity:0;transform:translate(-50%, -50%) scale(1.3) translateY(-120px);filter:blur(20px);}}
+
+/* SHOWCASE INDIVIDUAL */
+.car-showcase{position:fixed;top:0;left:0;width:100%;height:100%;z-index:30;pointer-events:none;opacity:0;display:none;}
+.car-showcase.active{display:block;opacity:1;}
+
+.car-show{position:absolute;width:clamp(140px,16vw,200px);height:auto;filter:drop-shadow(0 0 40px #00d4ff) drop-shadow(0 0 60px #0099ff);opacity:0;left:-300px;top:50%;transform:translateY(-50%);}
+
+/* Animación: izquierda -> centro (zoom) -> derecha arriba */
+@keyframes carShowSequence{
+0%{opacity:0;left:-300px;top:50%;transform:translateY(-50%) scale(0.8) rotate(-25deg);filter:drop-shadow(0 0 40px #00d4ff);}
+20%{opacity:1;left:50%;top:50%;transform:translate(-50%, -50%) scale(1.2) rotate(0deg);filter:drop-shadow(0 0 60px #00d4ff);}
+50%{opacity:1;left:50%;top:50%;transform:translate(-50%, -50%) scale(3.2) rotate(360deg);filter:drop-shadow(0 0 120px #00d4ff) drop-shadow(0 0 150px #0099ff);}
+75%{opacity:1;left:50%;top:50%;transform:translate(-50%, -50%) scale(1.5) rotate(380deg);filter:drop-shadow(0 0 70px #00d4ff);}
+100%{opacity:1;left:85%;top:var(--final-top);transform:translateX(-50%) scale(1) rotate(0deg);filter:drop-shadow(0 0 50px #00d4ff) drop-shadow(0 0 70px #0099ff);}
+}
+
+/* Carritos formados en columna derecha */
+.car-formation{position:fixed;width:clamp(140px,16vw,200px);height:auto;filter:drop-shadow(0 0 40px #00d4ff) drop-shadow(0 0 60px #0099ff);opacity:0;z-index:32;}
+
+/* MENSAJE FINAL "Te quiero" */
+.final-message{position:fixed;top:50%;left:-500px;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:clamp(3em,8vw,8em);color:#00d4ff;z-index:40;opacity:0;display:none;font-weight:700;letter-spacing:5px;text-shadow:0 0 40px #00d4ff, 0 0 60px #0099ff, 0 0 80px #0066ff;white-space:nowrap;}
+.final-message.show{display:block;animation:finalMessageSequence 4s cubic-bezier(0.45,0.05,0.55,0.95) forwards;}
+@keyframes finalMessageSequence{
+0%{opacity:0;left:-500px;top:50%;transform:translateY(-50%) scale(0.8);filter:blur(20px);}
+20%{opacity:1;left:50%;top:50%;transform:translate(-50%,-50%) scale(1.5);filter:blur(0);}
+50%{opacity:1;left:50%;top:50%;transform:translate(-50%,-50%) scale(4);filter:drop-shadow(0 0 150px #00d4ff) drop-shadow(0 0 200px #0099ff);}
+80%{opacity:1;left:50%;top:50%;transform:translate(-50%,-50%) scale(5);filter:drop-shadow(0 0 200px #00d4ff) drop-shadow(0 0 250px #0099ff);}
+100%{opacity:1;left:50%;top:50%;transform:translate(-50%,-50%) scale(5.5);filter:drop-shadow(0 0 250px #00d4ff) drop-shadow(0 0 300px #ffffff);}
+}
+
+/* EXPLOSIÓN BLANCA FINAL */
+.explosion{position:fixed;top:50%;left:50%;width:0;height:0;background:#ffffff;border-radius:50%;transform:translate(-50%,-50%);z-index:50;pointer-events:none;opacity:0;display:none;box-shadow:0 0 200px #ffffff, 0 0 400px #ffffff, inset 0 0 200px #ffffff;}
+.explosion.active{display:block;animation:explodeWhite 1.5s ease-out forwards;}
+@keyframes explodeWhite{
+0%{width:0;height:0;opacity:1;background:#00d4ff;box-shadow:0 0 100px #00d4ff;}
+40%{width:150vh;height:150vh;opacity:1;background:#ffffff;box-shadow:0 0 300px #ffffff, 0 0 500px #ffffff;}
+100%{width:400vh;height:400vh;opacity:1;background:#ffffff;box-shadow:0 0 600px #ffffff;filter:blur(0);}
+}
+
+.sparkle{position:fixed;width:8px;height:8px;background:#00d4ff;border-radius:50%;z-index:35;pointer-events:none;opacity:0;box-shadow:0 0 15px #00d4ff, 0 0 25px #0099ff;}
+@keyframes sparkleAnim{0%{opacity:0;transform:scale(0) rotate(0deg);}50%{opacity:1;transform:scale(3) rotate(180deg);}100%{opacity:0;transform:scale(0) rotate(360deg);}}
+
+/* Líneas de velocidad LED */
+.speed-line{position:fixed;height:4px;background:linear-gradient(90deg, transparent, #00d4ff, #0099ff, transparent);opacity:0;z-index:28;box-shadow:0 0 10px #00d4ff, 0 0 20px #0099ff;}
+@keyframes speedLine{0%{opacity:0;width:0;}50%{opacity:1;width:100%;}100%{opacity:0;width:100%;}}
+
+@media (max-width: 768px){
+.intro-title{font-size:clamp(2em,8vw,5em);}
+.intro-date{font-size:clamp(1em,3vw,1.8em);letter-spacing:4px;}
+.logo-intro{width:clamp(200px,50vw,350px);bottom:5%;}
+.car-message{font-size:clamp(1.5em,5vw,3em);padding:0 15px;}}
+</style>
+</head>
+<body>
+<!-- Estrellas de fondo -->
+<div class="stars-container" id="starsContainer"></div>
+
+<!-- Partículas flotantes -->
+<div class="particles" id="particlesContainer"></div>
+
+<!-- Símbolos flotantes -->
+<div id="flowersContainer"></div>
+
+<!-- INTRO con títulos -->
+<div class="intro-overlay" id="introOverlay">
+<h1 class="intro-title">¡Feliz Día de las Flores Azules!</h1>
+<div class="intro-subtitle">30 de Septiembre</div>
+<div class="intro-date">Regalando Flores Azules</div>
+<img class="logo-intro" src="img/logo.png" alt="Logo">
+</div>
+
+<!-- MENSAJE "Estos carritos son para ti" -->
+<div class="car-message" id="carMessage">Estos carritos son para ti 💙</div>
+
+<!-- SHOWCASE INDIVIDUAL -->
+<div class="car-showcase" id="carShowcase">
+<img class="car-show" id="carShow1" src="img/1.png" alt="Show Car 1">
+<img class="car-show" id="carShow2" src="img/2.png" alt="Show Car 2">
+<img class="car-show" id="carShow3" src="img/3.png" alt="Show Car 3">
+<img class="car-show" id="carShow4" src="img/4.png" alt="Show Car 4">
+<img class="car-show" id="carShow5" src="img/5.png" alt="Show Car 5">
+<img class="car-show" id="carShow6" src="img/6.png" alt="Show Car 6">
+</div>
+
+<!-- MENSAJE FINAL "Te quiero" -->
+<div class="final-message" id="finalMessage">Te quiero</div>
+
+<!-- Carritos formados en columna derecha -->
+<div id="formationContainer"></div>
+
+<!-- EXPLOSIÓN BLANCA FINAL -->
+<div class="explosion" id="explosion"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Crear estrellas
+  const starsContainer = document.getElementById('starsContainer');
+  for(let i = 0; i < 80; i++){
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    starsContainer.appendChild(star);
+  }
+
+  // Crear partículas LED azules
+  const particlesContainer = document.getElementById('particlesContainer');
+  for(let i = 0; i < 25; i++){
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 8 + 's';
+    particle.style.animationDuration = (5 + Math.random() * 5) + 's';
+    particlesContainer.appendChild(particle);
+  }
+
+  // Crear símbolos flotantes (solo masculinos)
+  const flowersContainer = document.getElementById('flowersContainer');
+  const flowerSymbols = ['💙', '⭐', '✨', '💠', '🔷', '🔹'];
+  for(let i = 0; i < 18; i++){
+    const flower = document.createElement('div');
+    flower.className = 'flower';
+    flower.textContent = flowerSymbols[Math.floor(Math.random() * flowerSymbols.length)];
+    flower.style.left = Math.random() * 100 + '%';
+    flower.style.animationDelay = Math.random() * 6 + 's';
+    flower.style.animationDuration = (4 + Math.random() * 4) + 's';
+    flowersContainer.appendChild(flower);
+  }
+
+  // Crear ondas de energía LED
+  function createEnergyWave(){
+    const wave = document.createElement('div');
+    wave.className = 'energy-wave';
+    wave.style.animation = 'waveExpand 2s ease-out forwards';
+    document.body.appendChild(wave);
+    setTimeout(() => wave.remove(), 2000);
+  }
+
+  // Crear líneas de velocidad LED
+  function createSpeedLines(){
+    for(let i = 0; i < 6; i++){
+      setTimeout(() => {
+        const line = document.createElement('div');
+        line.className = 'speed-line';
+        line.style.top = (20 + Math.random() * 60) + '%';
+        line.style.left = '0';
+        line.style.animation = 'speedLine 0.9s ease-out forwards';
+        document.body.appendChild(line);
+        setTimeout(() => line.remove(), 900);
+      }, i * 80);
+    }
+  }
+
+  // Ondas durante la intro
+  setTimeout(() => createEnergyWave(), 2000);
+  setTimeout(() => createEnergyWave(), 4000);
+
+  const introOverlay = document.getElementById('introOverlay');
+  const carMessage = document.getElementById('carMessage');
+  const carShowcase = document.getElementById('carShowcase');
+  const finalMessage = document.getElementById('finalMessage');
+  const explosion = document.getElementById('explosion');
+  const formationContainer = document.getElementById('formationContainer');
+
+  // 1. INTRO: Títulos y logo se presentan y desaparecen (0-7.5s)
+  setTimeout(() => {
+    introOverlay.style.opacity = '0';
+  }, 7500);
+
+  setTimeout(() => {
+    introOverlay.style.display = 'none';
+  }, 9000);
+
+  // 2. MENSAJE: "Estos carritos son para ti" aparece y desaparece (9s-13.5s)
+  setTimeout(() => {
+    carMessage.classList.add('show');
+    createEnergyWave();
+  }, 9000);
+
+  setTimeout(() => {
+    carMessage.style.display = 'none';
+  }, 13500);
+
+  // 3. SHOWCASE: Cada carro se presenta y se forma en columna derecha (13.5s+)
+  setTimeout(() => {
+    carShowcase.classList.add('active');
+    const carShows = document.querySelectorAll('.car-show');
+    const carImages = ['img/1.png', 'img/2.png', 'img/3.png', 'img/4.png', 'img/5.png', 'img/6.png'];
+    
+    carShows.forEach((car, index) => {
+      setTimeout(() => {
+        // Posición final en columna derecha (de arriba hacia abajo)
+        const finalTop = 10 + (index * 14); // 10%, 24%, 38%, 52%, 66%, 80%
+        car.style.setProperty('--final-top', finalTop + '%');
+        car.style.animation = 'carShowSequence 4.5s cubic-bezier(0.45,0.05,0.55,0.95) forwards';
+        
+        // Efectos visuales
+        setTimeout(() => createEnergyWave(), 800);
+        setTimeout(() => createEnergyWave(), 2200);
+        setTimeout(() => createSpeedLines(), 200);
+        setTimeout(() => createSpeedLines(), 3400);
+        
+        // Chispas LED azules en el zoom
+        setTimeout(() => {
+          for(let i = 0; i < 25; i++){
+            setTimeout(() => {
+              const sparkle = document.createElement('div');
+              sparkle.className = 'sparkle';
+              sparkle.style.left = (50 + (Math.random() - 0.5) * 40) + '%';
+              sparkle.style.top = (50 + (Math.random() - 0.5) * 40) + '%';
+              sparkle.style.animation = 'sparkleAnim 1.2s ease-out forwards';
+              sparkle.style.animationDelay = Math.random() * 0.4 + 's';
+              document.body.appendChild(sparkle);
+              setTimeout(() => sparkle.remove(), 1600);
+            }, i * 35);
+          }
+        }, 2200);
+
+        // Crear carro formado en columna derecha
+        setTimeout(() => {
+          const formationCar = document.createElement('img');
+          formationCar.className = 'car-formation';
+          formationCar.src = carImages[index];
+          formationCar.style.right = '15%';
+          formationCar.style.top = finalTop + '%';
+          formationCar.style.transform = 'translateY(-50%)';
+          formationCar.style.animation = 'none';
+          formationCar.style.opacity = '1';
+          formationContainer.appendChild(formationCar);
+        }, 4500);
+
+      }, index * 5000);
+    });
+
+    // 4. EXPLOSIÓN BLANCA FINAL (después de todos los carros)
+    setTimeout(() => {
+      // Mostrar mensaje "Te quiero"
+      finalMessage.classList.add('show');
+      createEnergyWave();
+      
+      // Chispas durante el zoom del mensaje
+      setTimeout(() => {
+        for(let i = 0; i < 40; i++){
+          setTimeout(() => {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = (50 + (Math.random() - 0.5) * 60) + '%';
+            sparkle.style.top = (50 + (Math.random() - 0.5) * 60) + '%';
+            sparkle.style.animation = 'sparkleAnim 1.5s ease-out forwards';
+            sparkle.style.animationDelay = Math.random() * 0.5 + 's';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 2000);
+          }, i * 30);
+        }
+      }, 2000);
+      
+      // Explosión después del zoom del mensaje
+      setTimeout(() => {
+        explosion.classList.add('active');
+        
+        // Chispas finales blancas
+        for(let i = 0; i < 80; i++){
+          setTimeout(() => {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.background = '#ffffff';
+            sparkle.style.boxShadow = '0 0 20px #ffffff, 0 0 40px #ffffff';
+            sparkle.style.left = (50 + (Math.random() - 0.5) * 80) + '%';
+            sparkle.style.top = (50 + (Math.random() - 0.5) * 80) + '%';
+            sparkle.style.animation = 'sparkleAnim 2s ease-out forwards';
+            sparkle.style.animationDelay = Math.random() * 0.8 + 's';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 2800);
+          }, i * 20);
+        }
+        
+        // Ir al siguiente HTML después de la explosión blanca
+        setTimeout(() => {
+          window.location.href = 'fin.html';
+        }, 1500);
+      }, 4000);
+    }, carShows.length * 5000 + 2000);
+  }, 13500);
+});
+</script>
+</body>
+</html>

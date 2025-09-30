@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30 de Septiembre - Día de las Flores Azules</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Montserrat',sans-serif;min-height:100vh;background:#000;position:relative;overflow-x:hidden;}
+.white-flash{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:9999;pointer-events:none;animation:flashOut 1.5s ease-out forwards;}
+@keyframes flashOut{0%{opacity:1;}100%{opacity:0;}}
+.bg-gradient{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,#000428 0%,#004e92 50%,#000428 100%);z-index:0;}
+.stars-layer{position:fixed;width:100%;height:100%;top:0;left:0;z-index:1;}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 4s ease-in-out infinite alternate-reverse;box-shadow:0 0 8px rgba(255,255,255,0.8);}
+@keyframes twinkle{0%{opacity:0.3;}100%{opacity:1;}}
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.particle{position:absolute;width:6px;height:6px;background:#00d4ff;border-radius:50%;box-shadow:0 0 15px #00d4ff;animation:float 12s infinite;}
+@keyframes float{0%{transform:translateY(100vh);opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{transform:translateY(-100px);opacity:0;}}
+.emoji-rain{position:fixed;width:100%;height:100%;top:0;left:0;z-index:3;pointer-events:none;font-size:1.8em;}
+.emoji{position:absolute;animation:emojiFall 10s linear infinite;opacity:0.8;}
+@keyframes emojiFall{0%{transform:translateY(-100px);opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{transform:translateY(100vh);opacity:0;}}
+.cars-panel{position:fixed;top:0;left:0;width:100%;height:100%;z-index:5;pointer-events:none;}
+.car-img{position:absolute;width:160px;height:auto;animation:carFloat 6s ease-in-out infinite;pointer-events:auto;filter:drop-shadow(0 0 30px #00d4ff) drop-shadow(0 0 50px #0099ff);transition:all 0.3s ease;cursor:pointer;}
+.car-img:hover{filter:drop-shadow(0 0 50px #00d4ff) drop-shadow(0 0 70px #0099ff);transform:scale(1.15);}
+.car-img:nth-child(1){top:15%;left:5%;animation-delay:0s;}
+.car-img:nth-child(2){top:35%;right:7%;animation-delay:1s;}
+.car-img:nth-child(3){top:65%;left:10%;animation-delay:2s;}
+.car-img:nth-child(4){top:25%;right:28%;animation-delay:3s;}
+.car-img:nth-child(5){bottom:15%;right:10%;animation-delay:4s;}
+.car-img:nth-child(6){top:10%;left:32%;animation-delay:5s;}
+@keyframes carFloat{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-20px) rotate(2deg);}}
+.logo{position:relative;width:280px;height:auto;z-index:60;margin:15px auto;display:block;filter:drop-shadow(0 0 40px #00d4ff) drop-shadow(0 0 60px #0099ff);animation:logoFloat 4s ease-in-out infinite;}
+@keyframes logoFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.container{max-width:1300px;margin:0 auto;padding:40px 20px;position:relative;z-index:10;}
+.hero-section{text-align:center;margin-bottom:80px;position:relative;padding:40px 0;}
+.date-tag{display:inline-block;background:linear-gradient(135deg,#00d4ff,#0099ff);padding:12px 40px;border-radius:50px;font-size:0.9em;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#000;margin-bottom:30px;box-shadow:0 0 40px #00d4ff;border:2px solid rgba(255,255,255,0.3);}
+.main-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3em,8vw,7em);font-weight:700;color:#00d4ff;line-height:1.1;margin-bottom:25px;letter-spacing:-2px;text-shadow:0 0 30px #00d4ff,0 0 50px #0099ff,0 0 70px #0066ff;}
+.hero-text{font-size:clamp(1.1em,2vw,1.5em);color:rgba(255,255,255,0.9);font-weight:300;max-width:850px;margin:0 auto 40px;line-height:1.7;text-shadow:0 2px 10px rgba(0,0,0,0.5);}
+.flor-intro{text-align:center;margin:50px 0 20px;font-family:'Cormorant Garamond',serif;font-size:clamp(2em,5vw,3.5em);color:#00d4ff;font-weight:600;text-shadow:0 0 30px #00d4ff,0 0 50px #0099ff;animation:textGlow 3s ease-in-out infinite;}
+@keyframes textGlow{0%,100%{text-shadow:0 0 30px #00d4ff,0 0 50px #0099ff;}50%{text-shadow:0 0 50px #00d4ff,0 0 80px #0099ff,0 0 100px #0066ff;}}
+.flor-card{background:rgba(0,20,40,0.6);border:2px solid #00d4ff;border-radius:30px;padding:30px;backdrop-filter:blur(10px);box-shadow:0 0 50px rgba(0,212,255,0.4),inset 0 0 30px rgba(0,212,255,0.1);transition:all 0.5s ease;min-height:500px;display:flex;align-items:center;justify-content:center;}
+.flor-card:hover{transform:translateY(-10px);box-shadow:0 0 80px rgba(0,212,255,0.6),inset 0 0 50px rgba(0,212,255,0.2);}
+.flor-card iframe{width:100%;height:480px;border:0;background:transparent;border-radius:20px;}
+.content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:35px;margin:60px 0;}
+.phrase-card{background:rgba(0,20,40,0.7);border:2px solid #00d4ff;border-left:5px solid #00d4ff;border-radius:25px;padding:40px 35px;backdrop-filter:blur(10px);box-shadow:0 0 40px rgba(0,212,255,0.3);transition:all 0.5s ease;position:relative;overflow:hidden;}
+.phrase-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(0,212,255,0.1),transparent 60%);opacity:0;transition:opacity 0.5s;}
+.phrase-card:hover::before{opacity:1;animation:rotate 3s linear infinite;}
+@keyframes rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.phrase-card:hover{transform:translateY(-12px) scale(1.02);border-color:#00d4ff;box-shadow:0 0 70px rgba(0,212,255,0.6),0 0 100px rgba(0,153,255,0.4);}
+.phrase-icon{font-size:3.5em;margin-bottom:20px;filter:drop-shadow(0 0 20px #00d4ff);animation:iconBounce 3s ease-in-out infinite;}
+@keyframes iconBounce{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-15px) scale(1.08);}}
+.phrase-card h3{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8em,3vw,2.3em);color:#00d4ff;margin-bottom:18px;font-weight:600;text-shadow:0 0 20px #00d4ff;}
+.phrase-card p{color:rgba(255,255,255,0.9);font-size:clamp(1em,1.5vw,1.15em);line-height:1.8;font-weight:300;}
+.accent{color:#00d4ff;font-weight:600;text-shadow:0 0 10px #00d4ff;}
+.finale-section{text-align:center;padding:80px 40px;background:rgba(0,20,40,0.8);border-radius:40px;border:2px solid #00d4ff;backdrop-filter:blur(15px);box-shadow:0 0 60px rgba(0,212,255,0.4);margin-top:60px;position:relative;overflow:hidden;}
+.finale-section::before{content:'';position:absolute;top:-100%;left:-100%;width:300%;height:300%;background:radial-gradient(circle,rgba(0,212,255,0.1),transparent 40%);animation:finaleRotate 20s linear infinite;}
+@keyframes finaleRotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.sparkles{font-size:3em;margin-bottom:25px;filter:drop-shadow(0 0 25px #00d4ff);animation:sparkle 2s ease-in-out infinite;}
+@keyframes sparkle{0%,100%{transform:scale(1) rotate(0deg);}50%{transform:scale(1.1) rotate(10deg);}}
+.finale-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5em,5vw,4em);color:#00d4ff;margin-bottom:25px;font-weight:700;text-shadow:0 0 40px #00d4ff,0 0 60px #0099ff;}
+.finale-section p{font-size:clamp(1.1em,2vw,1.4em);color:rgba(255,255,255,0.9);max-width:900px;margin:0 auto 30px;line-height:1.8;font-weight:300;}
+.closing-message{font-size:clamp(1.3em,3vw,1.7em);color:#00d4ff;margin-top:35px;font-weight:600;text-shadow:0 0 30px #00d4ff;}
+.creator{margin-top:50px;padding:25px;background:rgba(0,0,0,0.5);border-radius:20px;border:1px solid #00d4ff;font-size:1.1em;color:#00d4ff;font-weight:500;text-shadow:0 0 15px #00d4ff;letter-spacing:1px;}
+.creator span{font-weight:700;font-size:1.2em;}
+@media (max-width:768px){.main-title{font-size:3.5em;}.hero-text{font-size:1.2em;padding:0 15px;}.car-img{width:100px;}.logo{width:220px;}.flor-card{min-height:400px;}.flor-card iframe{height:380px;}.phrase-card{padding:30px 25px;}.finale-section{padding:60px 25px;}}
+</style>
+</head>
+<body>
+<div class="white-flash"></div>
+<div class="bg-gradient"></div>
+<div class="stars-layer" id="stars"></div>
+<div class="particles" id="particles"></div>
+<div class="emoji-rain" id="emojis"></div>
+<div class="cars-panel">
+<img class="car-img" src="img/1.png" alt="Hot Wheels 1">
+<img class="car-img" src="img/2.png" alt="Hot Wheels 2">
+<img class="car-img" src="img/3.png" alt="Hot Wheels 3">
+<img class="car-img" src="img/4.png" alt="Hot Wheels 4">
+<img class="car-img" src="img/5.png" alt="Hot Wheels 5">
+<img class="car-img" src="img/6.png" alt="Hot Wheels 6">
+</div>
+<div class="container">
+<div class="hero-section">
+<div class="date-tag">30 de Septiembre</div>
+<h1 class="main-title">Día de las Flores Azules</h1>
+<img class="logo" src="img/logo.png" alt="Logo">
+<p class="hero-text">Una celebración especial dedicada a los hombres extraordinarios que iluminan nuestras vidas con su presencia, fuerza y amor incondicional</p>
+</div>
+<h2 class="flor-intro">Estas flores azules son para ti 💙</h2>
+<div class="flor-card">
+<iframe src="flor.html" title="Flor azul"></iframe>
+</div>
+<div class="content-grid">
+<div class="phrase-card">
+<div class="phrase-icon">💙</div>
+<h3>Eres mi todo</h3>
+<p>Cada día a tu lado es un regalo. Tu amor me hace <span class="accent">más fuerte</span>, tu risa ilumina mis días más oscuros y tu presencia es mi mayor tesoro.</p>
+</div>
+<div class="phrase-card">
+<div class="phrase-icon">⭐</div>
+<h3>Mi héroe personal</h3>
+<p>Admiro tu <span class="accent">valentía</span>, tu determinación y cómo enfrentas cada desafío. Eres el hombre más increíble que conozco.</p>
+</div>
+<div class="phrase-card">
+<div class="phrase-icon">🏆</div>
+<h3>Campeón de mi corazón</h3>
+<p>No necesitas medallas para ser mi <span class="accent">número uno</span>. Tu bondad, tu esfuerzo y tu amor te hacen invencible ante mis ojos.</p>
+</div>
+<div class="phrase-card">
+<div class="phrase-icon">💪</div>
+<h3>Tu fuerza me inspira</h3>
+<p>Tu <span class="accent">fortaleza interior</span> es contagiosa. Me enseñas cada día que con determinación todo es posible. Eres mi mayor inspiración.</p>
+</div>
+<div class="phrase-card">
+<div class="phrase-icon">✨</div>
+<h3>Brillas con luz propia</h3>
+<p>Tu energía positiva, tu <span class="accent">sonrisa sincera</span> y tu forma de ser única hacen del mundo un lugar mejor. Gracias por existir.</p>
+</div>
+<div class="phrase-card">
+<div class="phrase-icon">🎯</div>
+<h3>Contigo todo es posible</h3>
+<p>A tu lado me siento <span class="accent">invencible</span>. Tu apoyo incondicional y tu amor me dan la fuerza para conquistar cualquier sueño.</p>
+</div>
+<div class="phrase-card">
+<div class="phrase-icon">🌟</div>
+<h3>Eres extraordinario</h3>
+<p>No lo olvides: eres <span class="accent">único e irrepetible</span>. Tu forma de amar, de cuidar y de ser es lo más valioso que existe.</p>
+</div>
+<div class="phrase-card">
+<div class="phrase-icon">🔥</div>
+<h3>Tu pasión mueve montañas</h3>
+<p>La <span class="accent">pasión</span> con la que vives cada momento es admirable. Tu entusiasmo y energía transforman todo lo que tocas.</p>
+</div>
+<div class="phrase-card">
+<div class="phrase-icon">🎁</div>
+<h3>El mejor regalo</h3>
+<p>Tenerte en mi vida es el <span class="accent">regalo más grande</span>. Cada momento contigo es un tesoro que guardo en mi corazón.</p>
+</div>
+</div>
+<div class="finale-section">
+<div class="sparkles">✨ 💙 ⭐ 💙 ✨</div>
+<h2>Un Día Para Recordar</h2>
+<p>Que este 30 de septiembre sea un hermoso recordatorio de lo especial que eres y del inmenso amor que mereces recibir cada día de tu vida</p>
+<p class="closing-message">¡Feliz Día de las Flores Azules! 💙</p>
+<div class="creator">Creador: <span>@YoSoyTonyHxP</span></div>
+</div>
+</div>
+<script>
+const stars=document.getElementById('stars');for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*3+'s';stars.appendChild(s);}
+const particles=document.getElementById('particles');for(let i=0;i<20;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*10+'s';p.style.animationDuration=(8+Math.random()*6)+'s';particles.appendChild(p);}
+const emojis=document.getElementById('emojis');const emojiList=['💙','⭐','✨','💠','🔷'];for(let i=0;i<25;i++){const e=document.createElement('div');e.className='emoji';e.textContent=emojiList[Math.floor(Math.random()*emojiList.length)];e.style.left=Math.random()*100+'%';e.style.animationDelay=Math.random()*8+'s';e.style.animationDuration=(7+Math.random()*5)+'s';emojis.appendChild(e);}
+</script>
+</body>
+</html>
